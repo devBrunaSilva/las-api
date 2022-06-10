@@ -1,4 +1,6 @@
+
 [
+ //eslint semi: ["error", "always", { "omitLastInOneLineBlock": true}] 
   {
     "telefone": "(77) 3526-9098",
     "celular": "(77) 99996-9098",
