@@ -6,14 +6,12 @@
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
-  }
+  },
   "workbench.colorCustomizations": {
     "titleBar.activeBackground": "#0f626d",
     "titleBar.inactiveBackground": "#0f626d",
     "titleBar.activeForeground": "#ffffff",
     "titleBar.inactiveForeground": "#000000"
-  }
-
-    
+  }    
 }
   
