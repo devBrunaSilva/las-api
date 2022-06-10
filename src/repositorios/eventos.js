@@ -14,7 +14,9 @@ class Eventos {
 
   async listarPorId(id){
     const sql =  "SELECT * FROM Eventos WHERE id = ?";
-    return query(sql,id).then((evento) => evento[0]);
+    
+    const retorna = await query(sql, id);
+    return retorna[0];
   }
 
   async listarPorStatusAgendado(){

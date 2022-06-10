@@ -1,4 +1,5 @@
 const { isURLValida } = require("../infraestrutura/validacoes");
+const { cpf } = require("cpf-cnpj-validator");
 const repositorio = require("../repositorios/usuarios");  
 
 class Usuarios {
@@ -36,7 +37,7 @@ class Usuarios {
     const existemErros = erros.length > 0;
 
     if (existemErros) {
-      throw { erroApp: erros };
+      return Promise.reject(erros);
     } else {
       const resp = await repositorio.adicionar(usuario);
       return { id: resp.insertId, ...usuario };
@@ -70,9 +71,25 @@ class Usuarios {
   }
 
   alterarDadosPessoais(id, valores) {
+
+
+    const cpfEhValido = this.isValidaCPF(valores.cpf);
+
+    if(!cpfEhValido){
+      return Promise.reject({
+        nome: "cpf",
+        valido: cpfEhValido,
+        mensagem: "CPF inválido"
+      });
+    }
+
     return repositorio.alterarDadosPessoais(id, valores);
+    
   }
 
+  isValidaCPF(cpfValidar){
+    return cpf.isValid(cpfValidar);
+  }
 
   // Contatos
   listarContatos(id){

@@ -19,7 +19,7 @@ class TiposVendas{
     const erros = validacoes.filter((campo) => !campo.valido);
     const existemErros =  erros.length > 0;
     if(existemErros){
-      throw {erroApp: erros};
+      return Promise.reject(erros);
     }else{
       const resp = await repositorio.adicionar(tipoVenda);
       return {id: resp.insertId, ...tipoVenda};

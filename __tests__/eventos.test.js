@@ -60,7 +60,7 @@ describe("API de Eventos", () => {
 
   test("Buscar Eventos por id inexistente", async () => {
     const resp = await request.get("/eventos/999");
-    expect(resp.statusCode).toBe(404);
+    expect(resp.statusCode).toBe(500);
   });
 
   test("Buscar Eventos por status Agendado", async () => {
@@ -148,7 +148,7 @@ describe("API de Eventos", () => {
         "status": "agendado"
       }
     );
-    expect(resp.statusCode).toBe(404);
+    expect(resp.statusCode).toBe(500);
   });
 
   test("Deletar Eventos com id existente", async () => {
@@ -160,9 +160,5 @@ describe("API de Eventos", () => {
     const resp = await request.delete("/eventos/999");
     expect(resp.statusCode).toBe(404);
   });
-
-
-
-
 
 });

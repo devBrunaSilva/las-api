@@ -13,7 +13,7 @@ class Eventos {
       const resp = await repositorio.adicionar(evento);
       return {id: resp.insertId, ...evento};
     }else{
-      throw {erro: "As datas do evento estão inválidas"};
+      return Promise.reject({erro: "As datas do evento estão inválidas"});
     }    
   }
 
@@ -54,7 +54,7 @@ class Eventos {
     }   
   }
 
-  exclui(id){
+  excluir(id){
     return repositorio.excluir(id);
   }
 

@@ -47,14 +47,14 @@ describe("API de Tipos de Vendas", () => {
       id: 1111,
       descricao: "",
     });
-    expect(resp.statusCode).toBe(404);
-    expect(resp.body).toEqual({"erroApp": [
+    expect(resp.statusCode).toBe(500);
+    expect(resp.body).toEqual([
       { 
         mensagem: "Descrição deve ser informada e deve ser única",
         nome: "descricao",
         valido: false,
       }
-    ]});
+    ]);
   });
 
   test("Atualizar Tipo de Venda com id existente", async () => {
@@ -80,7 +80,7 @@ describe("API de Tipos de Vendas", () => {
         descricao: "Ingresso NBA"
       }
     );
-    expect(resp.statusCode).toBe(404);
+    expect(resp.statusCode).toBe(500);
   });
   
   test("Deletar Tipo de Venda com id existente", async () => {
@@ -90,7 +90,7 @@ describe("API de Tipos de Vendas", () => {
 
   test("Deletar Tipo de Venda com id inexistente", async () => {
     const resp = await request.delete("/tipos-venda/999");
-    expect(resp.statusCode).toBe(404);
+    expect(resp.statusCode).toBe(500);
   });
 
 });

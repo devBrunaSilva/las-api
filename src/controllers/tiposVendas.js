@@ -13,8 +13,8 @@ module.exports = (app) => {
     
     TiposVenda
       .listarPorId(id)
-      .then((usuario) => usuario ? res.json(usuario) : res.status(404).end())
-      .catch((erros) => res.status(500).json(erros));
+      .then((resuldados) => resuldados ? res.json(resuldados) : res.status(404).end())
+      .catch((erros) => res.status(404).json(erros));
   });
 
   app.post("/tipos-venda", (req,res) => {
@@ -23,7 +23,7 @@ module.exports = (app) => {
     TiposVenda
       .adicionar(tipoVenda)
       .then((resposta) => res.status(201).json(resposta))
-      .catch((erros) => res.status(404).json(erros));
+      .catch((erros) => res.status(500).json(erros));
   });
 
   app.put("/tipos-venda/:id", (req,res) => {
@@ -32,8 +32,8 @@ module.exports = (app) => {
 
     TiposVenda
       .alterar(id, dadosAtualizadosTiposVenda)
-      .then((resultado) => resultado ? res.json(resultado) : res.status(404).end())
-      .catch((erros) => res.status(404).json(erros));
+      .then((resultado) => resultado.affectedRows !== 0 ? res.json(resultado) : res.status(404).end())
+      .catch((erros) => res.status(500).json(erros));
   });
 
   app.delete("/tipos-venda/:id", (req,res) => {
@@ -41,7 +41,7 @@ module.exports = (app) => {
 
     TiposVenda
       .excluir(id)
-      .then((resposta) => resposta ? res.status(204).end() : res.status(404).send())
+      .then((resposta) => resposta.affectedRows !== 0 ? res.status(204).end() : res.status(404).send())
       .catch((erros) => res.status(500).json(erros));
   });
 

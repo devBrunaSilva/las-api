@@ -52,7 +52,7 @@
     ],
     "coverageThreshold": {
       "global": {
-        "lines": 60
+        "lines": 64
       }
     },
     "testResultsProcessor": "jest-sonar-reporter"
@@ -61,6 +61,7 @@
     "axios": "^0.27.2",
     "body-parser": "^1.20.0",
     "consign": "^0.1.6",
+    "cpf-cnpj-validator": "^1.0.3",
     "express": "^4.17.3",
     "moment": "^2.29.3",
     "mysql": "^2.18.1",

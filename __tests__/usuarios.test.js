@@ -84,13 +84,13 @@ describe("API de Usuários", () => {
       urlFotoPerfil: "https://randomuser.me/api/portraits/women/3.jpg"
     });
     expect(resp.statusCode).toBe(404);
-    expect(resp.body).toEqual({"erroApp": [
+    expect(resp.body).toEqual( [
       {
         mensagem: "Nome deve ser informado e deve ser único",
         nome: "nome",
         valido: false,
       },
-    ]});
+    ]);
   });
 
   test("Adicionar Usuário com Nome que já possui", async () => {
@@ -99,13 +99,13 @@ describe("API de Usuários", () => {
       urlFotoPerfil: "https://randomuser.me/api/portraits/women/3.jpg",
     });
     expect(resp.statusCode).toBe(404);
-    expect(resp.body).toEqual({"erroApp": [
+    expect(resp.body).toEqual([
       {
         mensagem: "Nome deve ser informado e deve ser único",
         nome: "nome",
         valido: false,
       },
-    ]});
+    ]);
   });
 
   test("Adicionar Usuário com Dados Inválidos", async () => {
@@ -114,7 +114,7 @@ describe("API de Usuários", () => {
       urlFotoPerfil:"xxxxxxxxxxxxxxxxxxxxxxxxxx"
     });
     expect(resp.statusCode).toBe(404);
-    expect(resp.body).toEqual({"erroApp": [
+    expect(resp.body).toEqual( [
       {
         mensagem: "Nome deve ser informado e deve ser único",
         nome: "nome",
@@ -125,7 +125,7 @@ describe("API de Usuários", () => {
         nome: "urlFotoPerfil",
         valido: false,
       }
-    ]});
+    ]);
   });
 
   test("Atualizar usuário com id existente", async () => {
@@ -191,19 +191,19 @@ describe("API de Usuários", () => {
   test("Atualizar Dados Pessoais do Usuário com id existente", async () => {
     const resp = await request.put("/usuarios/1/dados-pessoais").send(
       {
-        nomeCompleto: "Maria Pereira Souza Santos" ,
-        dataNascimento: "10121978",
-        rg: "1313312312" ,
-        cpf: "11100000003"
+        nomeCompleto: "João Paulo Souza Santos" ,
+        dataNascimento: "30081980",
+        rg: "1212312312" ,
+        cpf: "26249353046"
       }
     );
     expect(resp.statusCode).toBe(200);
     expect(resp.body).toEqual(
       {
-        nomeCompleto: "Maria Pereira Souza Santos" ,
-        dataNascimento: "10121978",
-        rg: "1313312312" ,
-        cpf: "11100000003"
+        cpf: "26249353046",
+        dataNascimento: "30081980",
+        nomeCompleto: "João Paulo Souza Santos",
+        rg: "1212312312", 
       }
     );
   });

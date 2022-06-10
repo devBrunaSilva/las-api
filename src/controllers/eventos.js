@@ -5,7 +5,7 @@ module.exports = (app) =>{
     Eventos
       .listar()
       .then((resultados) => res.json(resultados))
-      .catch((erros) => res.status(400).json(erros));
+      .catch((erros) => res.status(500).json(erros));
   });
 
   app.get("/eventos/:id", (req,res)=>{
@@ -13,7 +13,7 @@ module.exports = (app) =>{
     Eventos
       .listarPorId(id)
       .then((resultado) => resultado ? res.json(resultado) : res.status(404).end())
-      .catch((erros) => res.status(404).json(erros));
+      .catch((erros) => res.status(500).json(erros));
   });
 
   app.get("/eventos/status/:status", (req,res) => {
@@ -37,15 +37,15 @@ module.exports = (app) =>{
     const dadosAtualizadosEvento = req.body;
     Eventos
       .alterar(id,dadosAtualizadosEvento)
-      .then((resposta) => resposta ? res.json(resposta) : res.status(404).send())
-      .catch((erros) => res.status(404).json(erros));
+      .then((resposta) => resposta.affectedRows !== 0 ? res.json(resposta) : res.status(404).send())
+      .catch((erros) => res.status(500).json(erros));
   });
 
   app.delete("/eventos/:id", (req,res) => {
     const id = parseInt(req.params.id);
     Eventos
-      .exclui(id)
-      .then((evento) => evento ? res.status(204).end() : res.status(404).end())
-      .catch((erros) => res.status(500).json(erros));
+      .excluir(id)
+      .then((evento) => evento.affectedRows !== 0  ? res.status(204).end() : res.status(404).end())
+      .catch((erros) => res.status(404).json(erros));
   });
 };

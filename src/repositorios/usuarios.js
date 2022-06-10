@@ -13,13 +13,14 @@ class Usuario {
   }
 
   async buscarPorId(id){
-    const [sql] = await query("SELECT id, nome, urlFotoPerfil FROM Usuarios WHERE id = $1", [id]);
-    return sql;
+    const sql= "SELECT id, nome, urlFotoPerfil FROM Usuarios WHERE id = ?";
+    const retorna = await query(sql, id);
+    return retorna[0];
   }
 
   async buscarPorNome(nome){
-    const [sql] = await query("SELECT id, nome, urlFotoPerfil FROM Usuarios WHERE nome like ?","%" + nome + "%" );
-    return sql;
+    const sql = "SELECT id, nome, urlFotoPerfil FROM Usuarios nome like ?";
+    return query(sql, "%" + nome + "%");
   }
 
   alterar(id, dadosAtualizados){
@@ -33,9 +34,11 @@ class Usuario {
   }
 
   // Dados Pessoais
-  listarDadosPessoais(id){
+  async listarDadosPessoais(id){
     const sql = "SELECT nomeCompleto, dataNascimento, rg, cpf FROM Usuarios WHERE id = ?";
-    return query(sql, id);
+
+    const retorna = await query(sql, id);
+    return retorna[0];
   }
 
   alterarDadosPessoais(id, dadosPessoaisAtualizados) {
@@ -45,8 +48,10 @@ class Usuario {
 
   // Contatos
   async listarContatos(id) {
-    const [sql] = await query(`SELECT telefone, celular, email FROM Usuarios WHERE id = ${id}`);
-    return sql;
+    const sql = "SELECT telefone, celular, email FROM Usuarios WHERE id = ?";
+    
+    const retorna = await query(sql, id);
+    return retorna[0];
   }
 
   alterarContatos(id, dadosContatosAtualizados){
@@ -63,10 +68,10 @@ class Usuario {
 
   // Endereço
   async listarEndereco(id){
-    
-    const [sql] = await query(`SELECT cep, endereco, numero, complemento, bairro FROM Usuarios WHERE id = ${id}`);
-
-    return sql;
+    const sql = "SELECT cep, endereco, numero, complemento, bairro FROM Usuarios WHERE id = ?";
+   
+    const retorna = await query(sql, id);
+    return retorna[0];
   }
 
   alterarEndereco(id, dadosEnderecoAtualizada){

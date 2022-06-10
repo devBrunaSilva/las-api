@@ -66,8 +66,8 @@ module.exports = (app) => {
 
     Usuarios
     .alterarDadosPessoais(id, dadosPessoaisAtualizados)
-    .then((resuldados) => resuldados.affectedRows !== 0 ? res.json({...dadosPessoaisAtualizados}) : res.status(404).end())
-    .catch((erros) => res.status(500).json(erros));
+    .then((resuldados) => resuldados.affectedRows !== 0 ? res.json(dadosPessoaisAtualizados) : res.status(404).end())
+    .catch((erros) => res.status(404).json(erros));
   });
 
 
@@ -77,7 +77,7 @@ module.exports = (app) => {
     Usuarios
       .listarContatos(id)
       .then((resultados) => resultados ? res.json(resultados) : res.status(404).json())
-      .catch((erros) => res.status(500).json(erros));
+      .catch((erros) => res.status(404).json(erros));
   });
 
   app.put("/usuarios/:id/contatos", (req,res) => {
@@ -86,7 +86,7 @@ module.exports = (app) => {
 
     Usuarios
       .alterarContatos(id, dadosContatosAtualizados)
-      .then((resuldados) => resuldados.affectedRows !== 0 ? res.json({...dadosContatosAtualizados}) : res.status(404).end())
+      .then((resuldados) => resuldados.affectedRows !== 0 ? res.json(dadosContatosAtualizados) : res.status(404).end())
       .catch((erros) => res.status(500).json(erros));
   });
 
@@ -98,8 +98,8 @@ module.exports = (app) => {
 
     Usuarios
       .alterarSenha(id, dadosSenhaAtualizada)
-      .then((resuldados) => resuldados.affectedRows !== 0 ? res.json({...dadosSenhaAtualizada}) : res.status(404).end())
-      .catch((erros) => res.status(400).json(erros));
+      .then((resuldados) => resuldados.affectedRows !== 0 ? res.json(dadosSenhaAtualizada) : res.status(404).end())
+      .catch((erros) => res.status(500).json(erros));
   });
 
 
@@ -110,7 +110,7 @@ module.exports = (app) => {
     Usuarios
       .listarEndereco(id)
       .then((resultados) => resultados ? res.json(resultados) : res.status(404).json())
-      .catch((erros) => res.json(erros));
+      .catch((erros) => res.status(500).json(erros));
   });
 
   app.put("/usuarios/:id/endereco", (req, res) => {
@@ -119,7 +119,7 @@ module.exports = (app) => {
 
     Usuarios
       .alterarEndereco(id,dadosAtualizadosEndereco)
-      .then((resuldados) => resuldados.affectedRows !== 0 ? res.json({...dadosAtualizadosEndereco}) : res.status(404).end())
+      .then((resuldados) => resuldados.affectedRows !== 0 ? res.json(dadosAtualizadosEndereco) : res.status(404).end())
       .catch((erros) => res.status(500).json(erros));
   });
 };
