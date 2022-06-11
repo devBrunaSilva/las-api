@@ -9,11 +9,12 @@ load data local infile 'data/ufs.csv' into table UFs fields terminated by ',' li
 
 -- // cria uma conexão no mysql
 -- const connection = mysql.createConnection({
---   host: "127.0.0.1",
---   port: 3306,
---   user: "las",
---   password: "admin",
---   database: "las",
+--  connectionLimit: 100,
+--  host: "us-cdbr-east-05.cleardb.net",
+--  port: 3306,
+--  user: "b64f11391cba25",
+--  password: "0da1f4cb",
+--  database: "heroku_3c1ad05566789c1",
 -- });
 
 -- // cria um objeto do axios com url base (para não precisar)
